@@ -20,12 +20,13 @@ transition: transform 0.7s ease-in-out;
 transform-origin: left;
 position: relative;
 width: 100%;
-z-index: 10; /* Match content height */
+z-index: 10;
 height: auto;
 }
 .page-hidden {
 transform: rotateY(-180deg);
-visibility: hidden;display:none;
+visibility: hidden;
+display: none;
 }
 .page-active {
 transform: rotateY(0deg);
@@ -102,7 +103,22 @@ padding: 5px 0;
 font-size: 14px;
 font-weight: bold;
 }
-.plus-icon {position: absolute;top: 35px;right: 15px;background: rgba(255, 255, 255, 0.8);border-radius: 50%;width: 30px;height: 30px;display: flex;align-items: center;justify-content: center;font-size: 20px;cursor: pointer;transition: background 0.3s ease;color: #000;}
+.plus-icon {
+position: absolute;
+top: 35px;
+right: 15px;
+background: rgba(255, 255, 255, 0.8);
+border-radius: 50%;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+cursor: pointer;
+transition: background 0.3s ease;
+color: #000;
+}
 .plus-icon:hover {
 background: rgba(255, 255, 255, 1);
 }
@@ -157,10 +173,10 @@ body {
 font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 display: flex;
 flex-direction: column;
-background-color: #f9fafb; /* bg-gray-50 */
+background-color: #f9fafb;
 }
 main {
-margin-bottom: 5px; /* 5px gap below body content */
+margin-bottom: 5px;
 z-index: 20;
 }
 h1, h2, h3 {
@@ -183,10 +199,16 @@ background: linear-gradient(90deg, #ffffff, #d1d5db);
 /* Gradient for Banner */
 .banner {
 background: linear-gradient(135deg, #1e3a8a, #2dd4bf);
-height: 80vh; /* Fixed banner height */
+height: 80vh;
 }
 /* Footer Styling */
-footer {width: 100%;visibility: visible !important;position: relative;z-index: 5;margin-top: 25px;}
+footer {
+width: 100%;
+visibility: visible !important;
+position: relative;
+z-index: 5;
+margin-top: 25px;
+}
 .footer-links a, .footer-social a {
 color: #ffffff;
 transition: color 0.3s ease;
@@ -200,7 +222,7 @@ height: 24px;
 }
 .footer-copyright {
 font-weight: 600;
-font-size: 1.125rem; /* Matches text-lg */
+font-size: 1.125rem;
 }
 /* Blog Post Image */
 .blog-img {
@@ -213,15 +235,27 @@ margin-bottom: 1rem;
 /* Service Name Styling */
 .service-name {
 font-weight: 800;
-color: #111827; /* Higher contrast dark gray */
+color: #111827;
 }
 /* Page Content Styling */
-.page-content {background: #ffffff; /* bg-white */box-shadow: 0 4px 12px rgba(229, 231, 235, 0.6); /* Distinct light gray shadow */border-radius: 8px;margin: 3rem auto;max-width: 1200px;padding: 2rem; /* Ensure content height adapts */}
-.primary-menu{font-weight:bold;}
-
+.page-content {
+background: #ffffff;
+box-shadow: 0 4px 12px rgba(229, 231, 235, 0.6);
+border-radius: 8px;
+margin: 3rem auto;
+max-width: 1200px;
+padding: 2rem;
+}
+.primary-menu {
+font-weight: bold;
+}
 /*color palletes*/
-.white{color:#ffffff;}
-.grey{color:#ccc;}
+.white {
+color: #ffffff;
+}
+.grey {
+color: #ccc;
+}
 /* Footer Links Arrow Styling */
 .footer-links a {
 position: relative;
@@ -239,4 +273,67 @@ transition: color 0.3s ease;
 }
 .footer-links a:hover::before {
 color: #d1d5db;
+}
+/* Hamburger Menu Styling */
+.hamburger {
+display: none;
+flex-direction: column;
+justify-content: space-between;
+width: 30px;
+height: 20px;
+cursor: pointer;
+z-index: 60;
+}
+.hamburger span {
+width: 100%;
+height: 3px;
+background: #ffffff;
+transition: all 0.3s ease;
+border-radius: 2px;
+}
+.hamburger.active span:nth-child(1) {
+transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+transform: rotate(-45deg) translate(7px, -7px);
+}
+.nav-menu {
+display: flex;
+align-items: center;
+}
+@media (max-width: 768px) {
+.hamburger {
+display: flex;
+}
+.nav-menu {
+display: none;
+position: fixed;
+top: 0;
+right: 0;
+height: 100vh;
+width: 70%;
+max-width: 300px;
+background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+flex-direction: column;
+justify-content: center;
+align-items: center;
+transform: translateX(100%);
+transition: transform 0.3s ease, opacity 0.3s ease;
+opacity: 0;
+z-index: 50;
+}
+.nav-menu.active {
+display: flex;
+transform: translateX(0);
+opacity: 1;
+}
+.nav-menu button {
+margin: 1rem 0;
+font-size: 1.2rem;
+width: 100%;
+text-align: center;
+}
 }
