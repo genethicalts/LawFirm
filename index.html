@@ -5,20 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Legal firm</title>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<link href="assets/theme1.css" rel="stylesheet">
+
+<link href="assets/theme1.css"  rel="stylesheet"/>
+
+<style>
+
+</style>
 </head>
 <body>
 <!-- Navigation -->
 <nav class="text-white p-6 sticky top-0 z-50 shadow-lg">
 <div class="container mx-auto flex justify-between items-center">
 <h1 class="text-3xl font-bold logo">Law Firm</h1>
-<div class="space-x-6">
+<div class="nav-menu space-y-4 md:space-y-0 md:space-x-6 flex flex-col md:flex-row items-center">
 <button onclick="showPage('home')" class="hover:text-gray-200 text-lg primary-menu">Home</button>
 <button onclick="showPage('practice')" class="hover:text-gray-200 text-lg primary-menu">Practice Areas</button>
 <button onclick="showPage('about')" class="hover:text-gray-200 text-lg primary-menu">About Us</button>
 <button onclick="showPage('news')" class="hover:text-gray-200 text-lg primary-menu">News Room</button>
 <button onclick="showPage('contact')" class="bg-white text-indigo-600 px-6 py-2 rounded-lg hover:bg-gray-100 text-lg font-semibold">Get in Touch</button>
 </div>
+<button class="hamburger" aria-label="Toggle navigation menu">
+<span></span>
+<span></span>
+<span></span>
+</button>
 </div>
 </nav>
 
@@ -48,8 +58,8 @@
 <div class="carousel-inner">
 <div class="team-img">
 <img src="assets/team.png" alt="Sarah Mwangi">
-<div class="team-name">Sarah Mwangi</div>
-<div class="plus-icon" onclick="showModal('Sarah Mwangi', 'Senior Partner with over 15 years of experience in corporate law.')">+</div>
+<div class="team-name">James Okoth</div>
+<div class="plus-icon" onclick="showModal('James Okoth', 'Senior Partner with over 15 years of experience in corporate law.')">+</div>
 </div>
 <div class="team-img">
 <img src="assets/team.png" alt="James Okoth">
@@ -58,8 +68,8 @@
 </div>
 <div class="team-img">
 <img src="assets/team.png" alt="Grace Njoroge">
-<div class="team-name">Grace Njoroge</div>
-<div class="plus-icon" onclick="showModal('Grace Njoroge', 'Specialist in intellectual property and real estate law.')">+</div>
+<div class="team-name">James Okoth</div>
+<div class="plus-icon" onclick="showModal('James Okoth', 'Specialist in intellectual property and real estate law.')">+</div>
 </div>
 </div>
 </div>
@@ -186,11 +196,11 @@
 <div>
 <h3 class="text-xl font-semibold mb-4 grey">Quick Links</h3>
 <div class="footer-links flex flex-col space-y-2">
-<a href="#"  class="hover:underline">Home</a>
-<a href="#"  class="hover:underline">Practice Areas</a>
-<a href="#"  class="hover:underline">About Us</a>
-<a href="#"  class="hover:underline">News Room</a>
-<a href="#"  class="hover:underline">Contact</a>
+<a href="#" class="hover:underline">Home</a>
+<a href="#" class="hover:underline">Practice Areas</a>
+<a href="#" class="hover:underline">About Us</a>
+<a href="#" class="hover:underline">News Room</a>
+<a href="#" class="hover:underline">Contact</a>
 </div>
 </div>
 <div>
@@ -203,18 +213,28 @@
 </div>
 </div>
 <div class="mt-6 text-center">
-    <hr class="dashed" style="border-style: dashed;padding:7.5px;width:50%;margin:auto;align-items: center;">
+<hr class="dashed" style="border-style: dashed;padding:7.5px;width:50%;margin:auto;align-items: center;">
 <p class="footer-copyright white">&copy; 2025 Law Firm - Powered by G-creator2.50. All rights reserved.</p>
 </div>
 </footer>
 
-<!--script type="text/javascript">
+<script>
 // Page Flip Navigation
-function showPage(pageId) {
+window.showPage = function(pageId) {
+try {
 const loader = document.getElementById('loader');
+if (!loader) {
+console.error('Loader element not found');
+return;
+}
 loader.classList.add('active');
 setTimeout(() => {
 const pages = document.querySelectorAll('.page');
+if (pages.length === 0) {
+console.error('No page elements found');
+loader.classList.remove('active');
+return;
+}
 pages.forEach(page => {
 if (page.id === pageId) {
 page.classList.remove('page-hidden');
@@ -225,8 +245,23 @@ page.classList.remove('page-active');
 }
 });
 loader.classList.remove('active');
-}, 700); // Match loader duration to page transition
+// Close mobile menu after navigation
+const menu = document.querySelector('.nav-menu');
+const hamburger = document.querySelector('.hamburger');
+if (menu && hamburger && menu.classList.contains('active')) {
+menu.classList.remove('active');
+menu.style.transform = 'translateX(100%)';
+menu.style.opacity = '0';
+hamburger.classList.remove('active');
+hamburger.setAttribute('aria-expanded', 'false');
 }
+}, 700);
+} catch (error) {
+console.error('Error in showPage:', error);
+const loader = document.getElementById('loader');
+if (loader) loader.classList.remove('active');
+}
+};
 
 // Carousel Logic
 const carouselInner = document.querySelector('.carousel-inner');
@@ -234,133 +269,99 @@ const teamMembers = document.querySelectorAll('.team-img');
 let currentIndex = 0;
 
 function slideCarousel() {
+if (window.innerWidth > 640) {
 currentIndex = (currentIndex + 1) % teamMembers.length;
 carouselInner.style.transform = `translateX(${-currentIndex * 150}px)`;
+} else {
+carouselInner.style.transform = 'translateX(0)';
+}
 }
 
-setInterval(slideCarousel, 3000); // Slide every 3 seconds
+setInterval(slideCarousel, 3000);
 
 // Modal Logic
 function showModal(name, bio) {
+try {
 const modal = document.getElementById('modal');
 const modalImg = document.getElementById('modal-img');
 const modalName = document.getElementById('modal-name');
 const modalBio = document.getElementById('modal-bio');
+if (!modal || !modalImg || !modalName || !modalBio) {
+console.error('Modal elements not found');
+return;
+}
 modalImg.src = `https://placehold.co/100x100?text=${name.charAt(0)}${name.split(' ')[1]?.charAt(0) || ''}`;
 modalName.textContent = name;
 modalBio.textContent = bio;
 modal.style.display = 'flex';
+} catch (error) {
+console.error('Error in showModal:', error);
+}
 }
 
 function closeModal() {
+try {
 const modal = document.getElementById('modal');
+if (!modal) {
+console.error('Modal element not found');
+return;
+}
 modal.style.display = 'none';
+} catch (error) {
+console.error('Error in closeModal:', error);
+}
 }
 
 // Close modal when clicking outside
 window.onclick = function(event) {
+try {
 const modal = document.getElementById('modal');
 if (event.target === modal) {
 closeModal();
 }
+} catch (error) {
+console.error('Error in window.onclick:', error);
+}
 };
-</script-->
-    <script>
-        // Page Flip Navigation
-        window.showPage = function(pageId) {
-            try {
-                const loader = document.getElementById('loader');
-                if (!loader) {
-                    console.error('Loader element not found');
-                    return;
-                }
-                loader.classList.add('active');
-                setTimeout(() => {
-                    const pages = document.querySelectorAll('.page');
-                    if (pages.length === 0) {
-                        console.error('No page elements found');
-                        loader.classList.remove('active');
-                        return;
-                    }
-                    pages.forEach(page => {
-                        if (page.id === pageId) {
-                            page.classList.remove('page-hidden');
-                            page.classList.add('page-active');
-                        } else {
-                            page.classList.add('page-hidden');
-                            page.classList.remove('page-active');
-                        }
-                    });
-                    loader.classList.remove('active');
-                }, 700);
-            } catch (error) {
-                console.error('Error in showPage:', error);
-                const loader = document.getElementById('loader');
-                if (loader) loader.classList.remove('active');
-            }
-        };
 
-        // Carousel Logic
-        const carouselInner = document.querySelector('.carousel-inner');
-        const teamMembers = document.querySelectorAll('.team-img');
-        let currentIndex = 0;
+// Hamburger Menu Toggle
+function toggleMenu() {
+try {
+const menu = document.querySelector('.nav-menu');
+const hamburger = document.querySelector('.hamburger');
+if (!menu || !hamburger) {
+console.error('Menu or hamburger elements not found');
+return;
+}
+const isActive = menu.classList.contains('active');
+if (isActive) {
+menu.classList.remove('active');
+menu.style.transform = 'translateX(100%)';
+menu.style.opacity = '0';
+} else {
+menu.classList.add('active');
+menu.style.transform = 'translateX(0)';
+menu.style.opacity = '1';
+}
+hamburger.classList.toggle('active');
+hamburger.setAttribute('aria-expanded', !isActive);
+console.log(`Menu toggled: ${!isActive ? 'shown' : 'hidden'}`);
+} catch (error) {
+console.error('Error in toggleMenu:', error);
+}
+}
 
-        function slideCarousel() {
-            if (window.innerWidth > 640) {
-                currentIndex = (currentIndex + 1) % teamMembers.length;
-                carouselInner.style.transform = `translateX(${-currentIndex * 150}px)`;
-            } else {
-                carouselInner.style.transform = 'translateX(0)';
-            }
-        }
-
-        setInterval(slideCarousel, 3000);
-
-        // Modal Logic
-        function showModal(name, bio) {
-            try {
-                const modal = document.getElementById('modal');
-                const modalImg = document.getElementById('modal-img');
-                const modalName = document.getElementById('modal-name');
-                const modalBio = document.getElementById('modal-bio');
-                if (!modal || !modalImg || !modalName || !modalBio) {
-                    console.error('Modal elements not found');
-                    return;
-                }
-                modalImg.src = `https://placehold.co/100x100?text=${name.charAt(0)}${name.split(' ')[1]?.charAt(0) || ''}`;
-                modalName.textContent = name;
-                modalBio.textContent = bio;
-                modal.style.display = 'flex';
-                modal.show();
-            } catch (error) {
-                console.error('Error in showModal:', error);
-            }
-        }
-
-        function closeModal() {
-            try {
-                const modal = document.getElementById('modal');
-                if (!modal) {
-                    console.error('Modal element not found');
-                    return;
-                }
-                modal.style.display = 'none';
-            } catch (error) {
-                console.error('Error in closeModal:', error);
-            }
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            try {
-                const modal = document.getElementById('modal');
-                if (event.target === modal) {
-                    closeModal();
-                }
-            } catch (error) {
-                console.error('Error in window.onclick:', error);
-            }
-        };
-    </script>
+// Attach event listener to hamburger
+document.addEventListener('DOMContentLoaded', () => {
+const hamburger = document.querySelector('.hamburger');
+if (hamburger) {
+hamburger.addEventListener('click', toggleMenu);
+hamburger.addEventListener('touchstart', toggleMenu);
+hamburger.setAttribute('aria-expanded', 'false');
+} else {
+console.error('Hamburger button not found on DOM load');
+}
+});
+</script>
 </body>
 </html>
