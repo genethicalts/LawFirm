@@ -1,0 +1,242 @@
+/*Root Colors
+Gcreator2.50**/
+/* Star Animation with Gradient Glow */
+.star {
+position: absolute;
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(165,180,252,0.7) 70%, rgba(79,70,229,0) 100%);
+border-radius: 50%;
+animation: shine 3s linear infinite;
+opacity: 0;
+box-shadow: 0 0 10px 5px rgba(165,180,252,0.5);
+}
+@keyframes shine {
+0% { opacity: 0; transform: translateX(0); }
+50% { opacity: 1; }
+100% { opacity: 0; transform: translateX(100vw); }
+}
+/* Page Flip Animation */
+.page {
+transition: transform 0.7s ease-in-out;
+transform-origin: left;
+position: relative;
+width: 100%;
+z-index: 10; /* Match content height */
+height: auto;
+}
+.page-hidden {
+transform: rotateY(-180deg);
+visibility: hidden;display:none;
+}
+.page-active {
+transform: rotateY(0deg);
+visibility: visible !important;
+}
+/* Loader Animation */
+.loader {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 2000;
+background: rgba(0, 0, 0, 0.7);
+padding: 20px;
+border-radius: 10px;
+}
+.loader.active {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.dot {
+width: 12px;
+height: 12px;
+background: #4f46e5;
+border-radius: 50%;
+margin: 0 5px;
+animation: bounce 0.4s infinite alternate;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+to { transform: translateY(-10px); }
+}
+/* Service Card Hover */
+.service-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+background: white;
+border: 1px solid #e5e7eb;
+}
+.service-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+/* Gradient Circle for Team */
+.team-img {
+background: linear-gradient(135deg, #4f46e5, #a5b4fc);
+border-radius: 50%;
+width: 150px;
+height: 150px;
+flex: 0 0 auto;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+position: relative;
+cursor: pointer;
+}
+.team-img img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: 50%;
+}
+.team-name {
+position: absolute;
+bottom: 10px;
+background: rgba(0, 0, 0, 0.6);
+color: white;
+width: 100%;
+text-align: center;
+padding: 5px 0;
+font-size: 14px;
+font-weight: bold;
+}
+.plus-icon {position: absolute;top: 35px;right: 15px;background: rgba(255, 255, 255, 0.8);border-radius: 50%;width: 30px;height: 30px;display: flex;align-items: center;justify-content: center;font-size: 20px;cursor: pointer;transition: background 0.3s ease;color: #000;}
+.plus-icon:hover {
+background: rgba(255, 255, 255, 1);
+}
+/* Carousel */
+.carousel {
+overflow: hidden;
+width: 150px;
+position: relative;
+}
+.carousel-inner {
+display: flex;
+transition: transform 0.5s ease;
+}
+/* Modal */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+.modal-content {
+background: white;
+padding: 20px;
+border-radius: 8px;
+max-width: 400px;
+width: 90%;
+text-align: center;
+position: relative;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.modal-content img {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+margin-bottom: 10px;
+}
+.close-modal {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+cursor: pointer;
+}
+/* Professional Styling */
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+display: flex;
+flex-direction: column;
+background-color: #f9fafb; /* bg-gray-50 */
+}
+main {
+margin-bottom: 5px; /* 5px gap below body content */
+z-index: 20;
+}
+h1, h2, h3 {
+font-weight: 700;
+color: #1f2937;
+}
+p {
+color: #4b5563;
+}
+/* Gradient for Nav and Footer */
+nav, footer {
+background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+}
+/* Gradient for Logo */
+.logo {
+background: linear-gradient(90deg, #ffffff, #d1d5db);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+/* Gradient for Banner */
+.banner {
+background: linear-gradient(135deg, #1e3a8a, #2dd4bf);
+height: 80vh; /* Fixed banner height */
+}
+/* Footer Styling */
+footer {width: 100%;visibility: visible !important;position: relative;z-index: 5;margin-top: 25px;}
+.footer-links a, .footer-social a {
+color: #ffffff;
+transition: color 0.3s ease;
+}
+.footer-links a:hover, .footer-social a:hover {
+color: #d1d5db;
+}
+.footer-social img {
+width: 24px;
+height: 24px;
+}
+.footer-copyright {
+font-weight: 600;
+font-size: 1.125rem; /* Matches text-lg */
+}
+/* Blog Post Image */
+.blog-img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+border-radius: 8px;
+margin-bottom: 1rem;
+}
+/* Service Name Styling */
+.service-name {
+font-weight: 800;
+color: #111827; /* Higher contrast dark gray */
+}
+/* Page Content Styling */
+.page-content {background: #ffffff; /* bg-white */box-shadow: 0 4px 12px rgba(229, 231, 235, 0.6); /* Distinct light gray shadow */border-radius: 8px;margin: 3rem auto;max-width: 1200px;padding: 2rem; /* Ensure content height adapts */}
+.primary-menu{font-weight:bold;}
+
+/*color palletes*/
+.white{color:#ffffff;}
+.grey{color:#ccc;}
+/* Footer Links Arrow Styling */
+.footer-links a {
+position: relative;
+padding-left: 1.5rem;
+}
+.footer-links a::before {
+content: '→';
+position: absolute;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+color: #ffffff;
+font-size: clamp(12px, 3vw, 14px);
+transition: color 0.3s ease;
+}
+.footer-links a:hover::before {
+color: #d1d5db;
+}
